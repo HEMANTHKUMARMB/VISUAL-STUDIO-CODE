@@ -1,0 +1,77 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff0f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #d6336c;
+  margin-bottom: 20px;
+}
+
+.typing-text {
+  font-size: 1.1em;
+  color: #444;
+  white-space: pre-line;
+  line-height: 1.6;
+  min-height: 180px; /* Ensures space before text loads */
+}
+
+.heart {
+  font-size: 48px;
+  color: #e25555;
+  display: inline-block;
+  animation: pulse 1s infinite;
+  margin-top: 20px;
+}
+
+/* Floating heart animation */
+.floating-heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 3s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+}
+
+/* Heart pulsing */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}

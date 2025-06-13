@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Carousel</title>
+  <style>
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px;
+      background: #f0f0f0;
+    }
+
+    .carousel .tem {
+      width: 20%;
+      height: 250px;
+      max-width: 250px;
+      margin: 2px;
+      transition: 0.5s;
+      object-fit: cover;
+      filter: brightness(1);
+    }
+
+    /* Optional: hover effect */
+    .carousel .tem:hover {
+      filter: brightness(0.8);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="carousel">
+  <img class="tem" src="image 1.jpg" alt="Image 1">
+  <img class="tem" src="image 2.jpg" alt="Image 2">
+  <img class="tem" src="image 3.jpg" alt="Image 3">
+  <img class="tem" src="image 4.jpg" alt="Image 4">
+  <img class="tem" src="image 5.jpg" alt="Image 5">
+  
+</div>
+
+
+</body>
+</html>

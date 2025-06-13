@@ -1,0 +1,9 @@
+.carousel .tem {
+    width: 20%;                  /* Each item takes up 20% of the carousel width */
+    height: 250px;               /* Fixed height for each item */
+    max-width: 250px;            /* Maximum width limited to 250px */
+    margin: 2px;                 /* Small space around each item */
+    transition: 0.5s;            /* Smooth transition for any property change */
+    object-fit: cover;           /* Makes images cover the box without stretching */
+    filter: brightness(1);       /* Normal brightness (can be adjusted on hover, etc.) */
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heart Box</title>
+  <link rel="stylesheet" href="AAA.css" />
+</head>
+<body>
+
+  <!-- Heart Rain Background -->
+  <div class="heart-container" id="heart-rain"></div>
+
+  <!-- Main Box -->
+  <div class="box" id="heart-box">
+    <h1 class="title">HCG</h1>
+
+    <!-- Floating Hearts Inside Box -->
+    <div id="floating-hearts-container" style="position: relative; height: 100px;"></div>
+
+    <!-- Live Time -->
+    <p id="currentTime"></p>
+
+    <!-- Star Rating -->
+    <div class="stars" id="starContainer">
+      <span class="star" onclick="showEmoji(1)">★</span>
+      <span class="star" onclick="showEmoji(2)">★</span>
+      <span class="star" onclick="showEmoji(3)">★</span>
+      <span class="star" onclick="showEmoji(4)">★</span>
+      <span class="star" onclick="showEmoji(5)">★</span>
+    </div>
+    <div id="emojiResponse"></div>
+
+    <!-- Apology Typing Text -->
+    <p id="apology-text" style="white-space: pre-wrap; margin-top: 20px;"></p>
+  </div>
+
+  <script src="AAAA.js"></script>
+</body>
+</html>

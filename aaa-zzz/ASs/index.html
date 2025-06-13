@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI STORY GENERATOR</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl border border-gray-200">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">AI STORY GENERATOR</h1>
+
+    <div class="mb-4">
+      <label for="promptInput" class="block text-gray-700 text-sm font-semibold mb-2">
+        Enter your story idea or prompt:
+      </label>
+      <textarea
+        id="promptInput"
+        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 resize-y min-h-[100px]"
+        placeholder="e.g., A brave knight on a quest for a magical artifact in a cursed forest.">
+      </textarea>
+    </div>
+
+    <button
+      id="generateBtn"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 shadow-md transform hover:scale-105 active:scale-95"
+    >
+      Generate Story
+    </button>
+
+    <div id="loadingIndicator" class="mt-4 text-center text-gray-600 hidden">
+      <div class="flex items-center justify-center">
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 
+            3.042 1.135 5.824 3 7.938l3-2.647z">
+          </path>
+        </svg>
+        Generating your story...
+      </div>
+    </div>
+
+    <div id="errorBox" class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg hidden" role="alert">
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline" id="errorMessage">Something went wrong. Please try again.</span>
+    </div>
+
+    <div class="mt-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-xl font-semibold text-gray-800">Your Story:</h2>
+        <button
+          id="speakBtn"
+          title="Read story aloud"
+          class="flex items-center text-blue-600 hover:text-blue-800 transition font-medium"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-6 w-6 mr-1">
+            <path d="M5 9v6h4l5 5V4L9 9H5zm13.5 3c0-1.77-.73-3.37-1.91-4.53l-1.42 1.42A5.978 5.978 0 0116.5 12c0 1.66-.67 3.16-1.76 4.24l1.42 1.42A7.96 7.96 0 0018.5 12z"/>
+          </svg>
+          Speak
+        </button>
+      </div>
+
+      <div
+        id="storyOutput"
+        class="bg-gray-50 p-4 border border-gray-200 rounded-lg min-h-[200px] max-h-[400px] overflow-y-auto text-gray-800 leading-relaxed whitespace-pre-wrap"
+      >
+        Your generated story will appear here.
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

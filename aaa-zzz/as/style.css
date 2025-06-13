@@ -1,0 +1,95 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400% 400%;
+    animation: rainbowBg 10s infinite linear;
+    text-align: center;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+@keyframes rainbowBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    min-width: 300px;
+    animation: fadeIn 1.5s ease-in-out;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+}
+
+h1 {
+    color: #ff4d4d;
+    font-size: 40px;
+}
+
+.typing-text {
+    font-size: 24px;
+    color: #555;
+    font-style: italic;
+    display: block;
+    white-space: pre-line;
+    word-wrap: break-word;
+    overflow: hidden;
+    min-height: 100px;
+}
+
+.heart {
+    color: red;
+    font-size: 50px;
+    animation: heartbeat 1s infinite, floatHeart 2s infinite alternate;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+.heart:hover {
+    transform: translateY(-10px) scale(1.5);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes floatHeart {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.floating-heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: floatUp 3s linear infinite;
+    opacity: 0.8;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}

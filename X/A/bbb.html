@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .box1 {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .input-field {
+      margin-bottom: 15px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #add8e6; /* Light Blue */
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .input-email input {
+      color: green;
+    }
+
+    .input-password input {
+      color: blue;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Box -->
+  <div class="box box1">
+    <div class="input-field input-email">
+      <input type="email" id="email" placeholder="Email ID">
+    </div>
+    <div class="input-field input-password">
+      <input type="password" id="password" placeholder="Password">
+    </div>
+    <button onclick="handleLogin()">Submit</button>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "hemanth" && password === "hemanth") {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <title>Links</title>
+            <style>
+              body {
+                background-color: orange;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+              }
+              .link-box {
+                background-color: black;
+                padding: 30px;
+                border: 5px solid;
+                border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+                border-radius: 15px;
+                text-align: center;
+              }
+              .link-box a {
+                display: block;
+                margin: 10px 0;
+                color: cyan;
+                font-size: 18px;
+                text-decoration: none;
+              }
+              .link-box a:hover {
+                text-decoration: underline;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="link-box">
+              <a href="https://www.google.com/search?q=i+love+pdf" target="_blank">I Love PDF</a>
+              <a href="https://www.google.com/search?q=screener" target="_blank">Screener</a>
+              <a href="https://www.youtube.com" target="_blank">YouTube</a>
+
+            </div>
+          </body>
+          </html>
+        `);
+      } else {
+        alert("Invalid Email or Password.");
+      }
+    }
+  </script>
+
+</body>
+</html>

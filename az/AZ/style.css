@@ -1,0 +1,112 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Get references to the DOM elements
+    const promptInput = document.getElementById('promptInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorBox = document.getElementById('errorBox');
+    const errorMessage = document.getElementById('errorMessage');
+    const storyOutput = document.getElementById('storyOutput');
+    const speakBtn = document.getElementById('speakBtn');
+
+    /**
+     * Shows an error message in the error box.
+     * @param {string} message - The message to display.
+     */
+    function showError(message) {
+        errorMessage.textContent = message;
+        errorBox.classList.remove('hidden');
+    }
+
+    /**
+     * Clears any displayed error messages.
+     */
+    function clearError() {
+        errorBox.classList.add('hidden');
+        errorMessage.textContent = '';
+    }
+
+    /**
+     * Handles the story generation process when the button is clicked.
+     */
+    generateBtn.addEventListener('click', async () => {
+        const prompt = promptInput.value.trim();
+
+        // Clear previous outputs and errors
+        storyOutput.textContent = '';
+        clearError();
+
+        if (!prompt) {
+            showError('Please enter a story idea or prompt.');
+            return;
+        }
+
+        // Show loading indicator
+        loadingIndicator.classList.remove('hidden');
+        generateBtn.disabled = true; // Disable button during generation
+
+        try {
+            // Prepare the payload for the Gemini API call
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: `Generate a creative story based on the following prompt: "${prompt}"` }] });
+            const payload = { contents: chatHistory };
+
+            // The API key is automatically provided by the Canvas environment when it's an empty string.
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            // Make the fetch call to the Gemini API
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            // Check if the response was successful
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('API Error:', errorData);
+                throw new Error(errorData.error?.message || 'Failed to generate story from API.');
+            }
+
+            const result = await response.json();
+
+            // Extract the generated text from the response
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                const text = result.candidates[0].content.parts[0].text;
+                storyOutput.textContent = text; // Display the generated story
+            } else {
+                throw new Error('No story content received from the API.');
+            }
+
+        } catch (error) {
+            console.error('Story generation failed:', error);
+            showError(`Failed to generate story: ${error.message}`);
+            storyOutput.textContent = 'Could not generate story. Please try again with a different prompt.';
+        } finally {
+            // Hide loading indicator and re-enable button
+            loadingIndicator.classList.add('hidden');
+            generateBtn.disabled = false;
+        }
+    });
+
+    /**
+     * Handles the text-to-speech functionality.
+     */
+    speakBtn.addEventListener('click', () => {
+        const textToSpeak = storyOutput.textContent;
+        if (textToSpeak && textToSpeak !== 'Your generated story will appear here.') {
+            // Create a new SpeechSynthesisUtterance object
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            // Set language (optional, but good for accuracy)
+            utterance.lang = 'en-US';
+            // Speak the text
+            speechSynthesis.speak(utterance);
+        } else {
+            showError('There is no story to read aloud yet.');
+            // Optionally, clear the error after a few seconds
+            setTimeout(clearError, 3000);
+        }
+    });
+});

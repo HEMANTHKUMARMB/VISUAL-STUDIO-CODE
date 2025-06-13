@@ -1,0 +1,295 @@
+body {
+    font-family: 'Inter', sans-serif;
+    /* Subtle gradient for the sky */
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F2F7 100%);
+    perspective: 1500px; /* Increase perspective for stronger 3D */
+    overflow: hidden; /* Prevent scrollbars from general layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Background elements */
+.sun {
+    position: absolute;
+    top: 15%; /* Higher in the sky */
+    left: 85%; /* Towards the right */
+    width: 70px;
+    height: 70px;
+    background-color: #fdd835; /* A bright yellow */
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ffeb3b;
+    animation: moveSun 40s linear infinite alternate; /* Slower movement */
+    z-index: -1; /* Behind the book */
+}
+
+@keyframes moveSun {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-50px, 20px); }
+}
+
+.cloud {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent */
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    animation: floatCloud linear infinite;
+    z-index: -1;
+}
+
+.cloud1 {
+    width: 150px; height: 50px;
+    top: 20%; left: -20%;
+    animation-duration: var(--cloud-speed, 60s);
+    animation-delay: var(--cloud-start-delay, 0s);
+}
+
+.cloud2 {
+    width: 200px; height: 70px;
+    top: 30%; left: -30%;
+    animation-duration: var(--cloud-speed, 70s);
+    animation-delay: var(--cloud-start-delay, 10s);
+}
+
+.cloud3 {
+    width: 180px; height: 60px;
+    top: 25%; left: -10%;
+    animation-duration: var(--cloud-speed, 65s);
+    animation-delay: var(--cloud-start-delay, 20s);
+}
+
+@keyframes floatCloud {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 400px)); } /* Float across the whole screen */
+}
+
+
+/* Book Container */
+.book-container {
+    width: 900px; /* Adjust as needed */
+    height: 600px; /* Adjust as needed */
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(10deg) rotateX(5deg) scale(0.9); /* Initial book tilt */
+    transition: transform 0.8s ease-in-out;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.3); /* Overall shadow */
+    border-radius: 10px;
+    background-color: #f7f7f7; /* Light background for the spine area */
+}
+
+.book-container:hover {
+    transform: rotateY(0deg) rotateX(0deg) scale(1); /* Book opens slightly */
+}
+
+.book-container.open {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.05); /* Slightly larger when open */
+}
+
+
+/* Book Cover (Front) */
+.book-cover {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%; /* Half the book width */
+    height: 100%;
+    transform-origin: left;
+    transition: transform 0.8s ease-in-out;
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6); /* Purple gradient cover */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    z-index: 2; /* Ensure cover is above pages */
+}
+
+.book-container.open .book-cover {
+    transform: rotateY(-180deg); /* Opens like a real book */
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2); /* Shadow changes side */
+}
+
+.book-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+.cover-subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Book Pages Container */
+.book-pages {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: #fcfaf3; /* Creamy paper color */
+    border-radius: 10px;
+    overflow: hidden; /* Hide content that flows outside pages */
+}
+
+.left-page, .right-page {
+    width: 50%;
+    height: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable scrolling for page content */
+    background-color: #fcfaf3; /* Ensure pages are creamy */
+    border-left: 1px solid rgba(0,0,0,0.1); /* Subtle page separation */
+}
+
+.left-page {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.right-page {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+/* Scrollbar for pages */
+.left-page::-webkit-scrollbar, .right-page::-webkit-scrollbar {
+    width: 6px;
+}
+.left-page::-webkit-scrollbar-thumb, .right-page::-webkit-scrollbar-thumb {
+    background: #d4a761; /* Golden brown for magical paper */
+    border-radius: 10px;
+}
+.left-page::-webkit-scrollbar-track, .right-page::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+
+/* Prompt Section */
+.prompt-section {
+    background: #f7f7f7; /* Lighter background for input area */
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Story Display */
+.story-display {
+    background: #f7f7f7; /* Lighter background for output area */
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#storyOutput {
+    background: linear-gradient(135deg, #faf5ff, #fdf4ff, #eef2ff);
+    border: 2px solid #c084fc;
+    transform-style: preserve-3d;
+    transform: rotateX(6deg) rotateY(2deg);
+    box-shadow: 0 20px 40px rgba(128, 0, 128, 0.15);
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    padding: 1.5rem; /* Increase padding for better readability */
+    font-family: 'Playfair Display', serif; /* A more "storybook" font for output */
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+#storyOutput:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale(1.01);
+    box-shadow: 0 30px 60px rgba(147, 51, 234, 0.25), 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar for story output */
+#storyOutput::-webkit-scrollbar {
+    width: 6px;
+}
+#storyOutput::-webkit-scrollbar-thumb {
+    background: #b8860b; /* Golden brown for magical ink */
+    border-radius: 10px;
+}
+#storyOutput::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+/* Go Back Button Styling */
+.go-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem; /* Add some space above it */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Floating 3D Emojis */
+@keyframes float3D {
+  0% {
+    transform: translateY(0) rotate3d(1, 1, 0, 0deg) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-200px) rotate3d(1, 1, 0, 360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+.emoji {
+  position: absolute;
+  font-size: 2.5rem; /* Slightly larger emojis */
+  animation: float3D 6s ease-in-out forwards;
+  pointer-events: none;
+  opacity: 0; /* Start hidden */
+  z-index: 10;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Add subtle shadow for depth */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+    .book-container {
+        width: 100%;
+        height: auto;
+        flex-direction: column; /* Stack pages vertically */
+        transform: none; /* Remove initial tilt on smaller screens */
+        box-shadow: none;
+    }
+
+    .book-pages {
+        flex-direction: column;
+    }
+
+    .left-page, .right-page {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid rgba(0,0,0,0.1); /* Separator when stacked */
+    }
+
+    .book-cover {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 250px; /* Smaller cover height */
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        transform: none;
+    }
+
+    .book-container.open .book-cover {
+        transform: none; /* No flip animation on smaller screens */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .book-title {
+        font-size: 2rem;
+    }
+}
