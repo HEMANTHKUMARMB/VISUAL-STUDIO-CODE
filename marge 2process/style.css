@@ -1,0 +1,74 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000; /* You can change this to #111 or any other color */
+    overflow: hidden;
+}
+
+/* Container */
+.containeer {
+    position: absolute;
+    top: 20%;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 10s linear infinite;
+}
+
+/* Circle Styles */
+.circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: transparent;
+    width: calc(var(--i) * 2vmin);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3px solid rgb(0, 255, 13);
+    transform-style: preserve-3d;
+    transform: rotateX(70deg) translateZ(50px) rotate(calc(var(--i) * 18deg)) translateX(120px);
+    animation: pulse 2s ease-in-out infinite, animate 3s ease-in-out calc(var(--i) * 0.08s) infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+    box-shadow: 0 0 15px rgb(124, 124, 124), inset 0 0 15px rgb(124, 124, 124);
+}
+
+/* Animations */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotateX(70deg) translateZ(50px) rotate(calc(var(--i) * 18deg)) translateX(120px);
+    }
+    50% {
+        transform: scale(1.5) rotateX(70deg) translateZ(50px) rotate(calc(var(--i) * 18deg)) translateX(120px);
+    }
+}
+
+@keyframes animate {
+    0%, 100% {
+        transform: rotateX(70deg) translateZ(50px) translateY(0);
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        transform: rotateX(70deg) translateZ(50px) translateY(-50vmin);
+        filter: hue-rotate(360deg);
+    }
+}
